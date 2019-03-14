@@ -26,4 +26,16 @@ describe('websocket test', () => {
                 done();
             })
     })
+
+    it('should return a different mock response', done => {
+        socketFetch.mockImplementation(() => {
+            return Promise.resolve('hoy');
+        })
+
+        socketFetch({request: 'fromOne', success: 'A', errors: ['oops!']})
+            .then(response => {
+                expect(response).toBe('hoy');
+                done();
+            })
+    })
 })
